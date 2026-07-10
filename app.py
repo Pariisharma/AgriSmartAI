@@ -20,15 +20,15 @@ def home():
 
 @app.route("/crop-recommendation", methods=["POST"])
 def crop_recommendation():
+    try:
+        data = request.json
 
-    data = request.json
+        soil = data["soil"]
+        season = data["season"]
+        land = data["land"]
+        water = data["water"]
 
-    soil = data["soil"]
-    season = data["season"]
-    land = data["land"]
-    water = data["water"]
-
-    prompt = f"""
+        prompt = f"""
 Recommend the best crop for:
 
 Soil: {soil}
@@ -42,14 +42,19 @@ Crop:
 Reason:
 """
 
-    response = client.models.generate_content(
-        model="gemini-3-flash-preview",
-        contents=prompt
-    )
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt
+        )
 
-    return jsonify({
-        "recommendation": response.text
-    })
+        return jsonify({
+            "recommendation": response.text
+        })
+
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": str(e)}), 500
 
 
 if __name__ == "__main__":
