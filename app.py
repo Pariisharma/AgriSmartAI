@@ -3,9 +3,9 @@ from flask_cors import CORS
 from google import genai
 from dotenv import load_dotenv
 import os
+import time
 
-load_dotenv(dotenv_path=".env")
-
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
@@ -21,12 +21,19 @@ def home():
 @app.route("/crop-recommendation", methods=["POST"])
 def crop_recommendation():
     try:
-        data = request.json
+        data = request.get_json(force=True)
 
+        # Handle both lowercase and uppercase JSON keys
         soil = data.get("soil") or data.get("Soil")
         season = data.get("season") or data.get("Season")
         land = data.get("land") or data.get("Land")
         water = data.get("water") or data.get("Water")
+
+        if not all([soil, season, land, water]):
+            return jsonify({
+                "success": False,
+                "message": "Missing required fields."
+            }), 400
 
         prompt = f"""
 Recommend the best crop for:
@@ -42,19 +49,43 @@ Crop:
 Reason:
 """
 
-        response = client.models.generate_content(
-            model="gemini-3-flash-preview",
-            contents=prompt
-        )
+        last_error = None
+
+        # Retry if Gemini is busy
+        for attempt in range(3):
+            try:
+                response = client.models.generate_content(
+                    model="gemini-2.5-flash",
+                    contents=prompt
+                )
+
+                return jsonify({
+                    "success": True,
+                    "recommendation": response.text
+                })
+
+            except Exception as e:
+                last_error = e
+                print(f"Attempt {attempt+1} failed: {e}")
+
+                if attempt < 2:
+                    time.sleep(2)
 
         return jsonify({
-            "recommendation": response.text
-        })
+            "success": False,
+            "message": "Gemini server is busy. Please try again in a few seconds.",
+            "error": str(last_error)
+        }), 503
 
     except Exception as e:
         import traceback
         traceback.print_exc()
-        return jsonify({"error": str(e)}), 500
+
+        return jsonify({
+            "success": False,
+            "message": "Internal Server Error",
+            "error": str(e)
+        }), 500
 
 
 if __name__ == "__main__":
