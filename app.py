@@ -23,10 +23,10 @@ def crop_recommendation():
     try:
         data = request.json
 
-        soil = data["soil"]
-        season = data["season"]
-        land = data["land"]
-        water = data["water"]
+        soil = data.get("soil") or data.get("Soil")
+        season = data.get("season") or data.get("Season")
+        land = data.get("land") or data.get("Land")
+        water = data.get("water") or data.get("Water")
 
         prompt = f"""
 Recommend the best crop for:
