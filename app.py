@@ -29,6 +29,7 @@ def crop_recommendation():
         land = data.get("land") or data.get("Land")
         water = data.get("water") or data.get("Water")
 
+        # Validate input
         if not all([soil, season, land, water]):
             return jsonify({
                 "success": False,
@@ -51,10 +52,10 @@ Reason:
 
         last_error = None
 
-        # Retry if Gemini is busy
+        # Retry up to 3 times if Gemini is busy
         for attempt in range(3):
             try:
-               response = client.models.generate_content(
+                response = client.models.generate_content(
                     model="gemini-3-flash-preview",
                     contents=prompt
                 )
@@ -66,7 +67,7 @@ Reason:
 
             except Exception as e:
                 last_error = e
-                print(f"Attempt {attempt+1} failed: {e}")
+                print(f"Attempt {attempt + 1} failed: {e}")
 
                 if attempt < 2:
                     time.sleep(2)
