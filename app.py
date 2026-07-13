@@ -66,12 +66,19 @@ Reason:
                 })
 
             except Exception as e:
+                import traceback
+
                 last_error = e
-                print(f"Attempt {attempt + 1} failed: {e}")
+
+                print("=" * 60)
+                print(f"Attempt {attempt + 1} failed")
+                traceback.print_exc()
+                print("=" * 60)
 
                 if attempt < 2:
                     time.sleep(2)
-
+        print("Final Error:", last_error)
+        
         return jsonify({
             "success": False,
             "message": "Gemini server is busy. Please try again in a few seconds.",
