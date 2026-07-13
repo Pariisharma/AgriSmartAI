@@ -101,6 +101,14 @@ Reason:
 
                 last_error = e
 
+                # Handle Gemini quota exceeded
+                if "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e):
+                    return jsonify({
+                        "success": False,
+                        "message": "Daily Gemini API quota exceeded. Please try again tomorrow or use a new API key.",
+                        "error": str(e)
+                    }), 429
+
                 print("=" * 70)
                 print(f"Attempt {attempt+1} Failed")
                 traceback.print_exc()
