@@ -78,12 +78,17 @@ Reason:
 
                 print(f"\nAttempt {attempt+1}")
 
+                print("Using Model: gemini-3.5-flash")
+
                 response = client.models.generate_content(
-                    model="gemini-2.5-flash",
+                    model="gemini-3.5-flash",
                     contents=prompt
                 )
 
-                recommendation = response.text.strip()
+                recommendation = getattr(response, "text", "").strip()
+
+                if not recommendation:
+                    raise Exception("Empty response received from Gemini.")
 
                 print("Gemini Success")
 
@@ -103,7 +108,7 @@ Reason:
 
                 # Retry Delay
                 if attempt < 4:
-                    wait = 2 ** attempt
+                    wait = 5 * (attempt + 1)
                     print(f"Retrying in {wait} seconds...")
                     time.sleep(wait)
 
