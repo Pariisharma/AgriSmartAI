@@ -219,10 +219,6 @@ AI-generated recommendations are intended to assist farmers and should not repla
 
 B.Tech Computer Science Engineering
 
-Technical Intern at Xebia
-
-President – Raahat Social Welfare Club (2026–27)
-
 ---
 
 # 📌 Future Enhancements
