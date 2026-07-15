@@ -52,16 +52,27 @@ def crop_recommendation():
             }), 400
 
         prompt = f"""
-You are an expert agricultural advisor.
+You are an experienced agricultural expert.
 
-Analyze the following farm details:
+Based ONLY on the following inputs, recommend the most suitable crop.
 
-Soil Type: {soil}
-Season: {season}
-Land Area: {land} acres
-Water Availability: {water}
+Inputs:
+- Soil Type: {soil}
+- Season: {season}
+- Land Area: {land} acres
+- Water Availability: {water}
 
-Return ONLY in the following format.
+Important Rules:
+1. Use ONLY the given inputs.
+2. Water availability must strongly affect the recommendation.
+3. If water is Low, never recommend Rice.
+4. If water is Medium, Rice is allowed only when soil and season are suitable.
+5. If water is High, Rice can be recommended.
+6. Recommend Wheat only for Rabi season.
+7. Recommend Maize, Bajra, Jowar, Cotton, Soybean, Groundnut etc. whenever they better match the inputs.
+8. Every different input combination should produce a different recommendation whenever appropriate.
+
+Return ONLY in this format:
 
 Crop:
 Reason:
@@ -70,12 +81,6 @@ Tips:
 - Tip 1
 - Tip 2
 - Tip 3
-
-Rules:
-- Do not write markdown.
-- Do not use headings other than Crop, Reason, Confidence and Tips.
-- Confidence should be between 0 and 100%.
-- Keep Reason under 4 lines.
 """
 
         # Retry Logic
