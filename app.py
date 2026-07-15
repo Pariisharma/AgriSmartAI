@@ -48,8 +48,9 @@ def crop_recommendation():
         if not all([soil, season, land, water]):
             return jsonify({
                 "success": False,
-                "message": "Missing required fields."
-            }), 400
+                "message": "Please fill in all required fields.",
+                "recommendation": ""
+            }), 200
 
         prompt = f"""
 You are an experienced agricultural expert.
@@ -107,6 +108,7 @@ Tips:
 
                 return jsonify({
                     "success": True,
+                    "message": "Recommendation generated successfully.",
                     "recommendation": recommendation
                 }), 200
 
@@ -123,18 +125,18 @@ Tips:
                 if "429" in error_text or "RESOURCE_EXHAUSTED" in error_text:
                     return jsonify({
                         "success": False,
-                        "message": "Daily Gemini API quota exceeded. Please try again tomorrow or use another API key.",
-                        "error": error_text
-                    }), 429
+                        "message": "AI service is temporarily unavailable. Please try again later.",
+                        "recommendation": ""
+                    }), 200
 
                 # Gemini Busy
                 if "503" in error_text or "UNAVAILABLE" in error_text:
                     if attempt == 4:
                         return jsonify({
                             "success": False,
-                            "message": "Gemini servers are currently busy. Please try again after a few seconds.",
-                            "error": error_text
-                        }), 503
+                            "message": "AI service is temporarily unavailable. Please try again later.",
+                            "recommendation": ""
+                        }), 200
 
                 # Retry
                 if attempt < 4:
@@ -145,8 +147,9 @@ Tips:
         # All retries failed
         return jsonify({
             "success": False,
-            "message": "Failed to generate recommendation after multiple attempts."
-        }), 500
+            "message": "AI service is temporarily unavailable. Please try again.",
+            "recommendation": ""
+        }), 200
 
     except Exception as e:
 
@@ -154,9 +157,9 @@ Tips:
 
         return jsonify({
             "success": False,
-            "message": "Internal Server Error",
-            "error": str(e)
-        }), 500
+            "message": "AI service is temporarily unavailable. Please try again.",
+            "recommendation": ""
+        }), 200
 
 # ----------------------------
 # Run Server
