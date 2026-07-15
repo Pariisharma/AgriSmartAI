@@ -82,7 +82,7 @@ Reason:
                     contents=prompt
                 )
 
-                recommendation = getattr(response, "text", "").strip()
+                recommendation = response.text.strip()
 
                 if not recommendation:
                     raise Exception("Empty response received from Gemini.")
