@@ -75,10 +75,10 @@ Reason:
 
                 print("=" * 60)
                 print(f"Attempt {attempt + 1}")
-                print("Using Model: gemini-2.5-flash-lite")
+                print("Using Model: gemini-3-flash-preview")
 
-                response = client.models.generate_content(
-                    model="gemini-2.5-flash-lite",
+                rresponse = client.models.generate_content(
+                    model="gemini-3-flash-preview",
                     contents=prompt
                 )
 
