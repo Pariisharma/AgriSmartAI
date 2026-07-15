@@ -77,8 +77,8 @@ Reason:
                 print(f"Attempt {attempt + 1}")
                 print("Using Model: gemini-3-flash-preview")
 
-                rresponse = client.models.generate_content(
-                    model="gemini-3-flash-preview",
+                response = client.models.generate_content(
+                    model="models/gemini-3-flash-preview",
                     contents=prompt
                 )
 
