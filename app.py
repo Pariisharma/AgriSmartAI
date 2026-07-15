@@ -51,21 +51,31 @@ def crop_recommendation():
                 "message": "Missing required fields."
             }), 400
 
-        # Prompt
         prompt = f"""
-You are an agriculture expert.
+You are an expert agricultural advisor.
 
-Recommend the best crop based on:
+Analyze the following farm details:
 
 Soil Type: {soil}
 Season: {season}
 Land Area: {land} acres
 Water Availability: {water}
 
-Return ONLY in this format:
+Return ONLY in the following format.
 
 Crop:
 Reason:
+Confidence:
+Tips:
+- Tip 1
+- Tip 2
+- Tip 3
+
+Rules:
+- Do not write markdown.
+- Do not use headings other than Crop, Reason, Confidence and Tips.
+- Confidence should be between 0 and 100%.
+- Keep Reason under 4 lines.
 """
 
         # Retry Logic
