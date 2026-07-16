@@ -143,32 +143,6 @@ AI responses are generated dynamically based on user inputs.
 
 ---
 
-## 📸 Screenshots
-
-### Home
-
-![Home](Screenshots/Home.png)
-
-### Weather Dashboard
-
-![Weather](Screenshots/WeatherDashboard.png)
-
-### Crop Recommendation
-
-![Crop](Screenshots/CropRecommendation.png)
-
-### Soil Analysis
-
-![Soil](Screenshots/SoilAnalysis.png)
-
-### Fertilizer Recommendation
-
-![Fertilizer](Screenshots/FertilizerRecommendation.png)
-
-### Crop Calendar
-
-![Calendar](Screenshots/CropCalendar.png)
-
 # 🌦️ Weather API Integration
 
 The Weather Dashboard uses the OpenWeather API to fetch live weather data.
