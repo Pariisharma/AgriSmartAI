@@ -86,6 +86,37 @@ class RecommendationHistory(db.Model):
         server_default=db.func.now()
     )
 
+#LandSurveyHitory
+class LandSuitabilityHistory(db.Model):
+
+    __tablename__ = "land_suitability_history"
+
+    id = db.Column(db.Integer, primary_key=True)
+
+    farmer_id = db.Column(db.Integer)
+
+    state = db.Column(db.String(100))
+    district = db.Column(db.String(100))
+    village = db.Column(db.String(100))
+
+    land_area = db.Column(db.Float)
+
+    soil_type = db.Column(db.String(100))
+    water = db.Column(db.String(100))
+    season = db.Column(db.String(100))
+    irrigation = db.Column(db.String(100))
+
+    rainfall = db.Column(db.Float)
+
+    previous_crop = db.Column(db.String(100))
+
+    recommendation = db.Column(db.Text)
+
+    created_at = db.Column(
+        db.DateTime,
+        server_default=db.func.now()
+    )
+
 # ----------------------------
 # Home Route
 # ----------------------------
@@ -422,6 +453,96 @@ Tips:
             "message": "AI service is temporarily unavailable. Please try again.",
             "recommendation": ""
         }), 200
+
+#LandSurveyAPI
+@app.route("/land-suitability", methods=["POST"])
+def land_suitability():
+
+    try:
+
+        data = request.get_json(force=True)
+
+        farmer_id = data.get("farmer_id")
+
+        state = data.get("state")
+
+        district = data.get("district")
+
+        village = data.get("village")
+
+        land_area = data.get("land_area")
+
+        soil_type = data.get("soil_type")
+
+        water = data.get("water")
+
+        season = data.get("season")
+
+        irrigation = data.get("irrigation")
+
+        rainfall = data.get("rainfall")
+
+        previous_crop = data.get("previous_crop")
+
+        if not all([
+            farmer_id,
+            state,
+            district,
+            village,
+            land_area,
+            soil_type,
+            water,
+            season,
+            irrigation,
+            rainfall,
+            previous_crop
+        ]):
+            return jsonify({
+                "success": False,
+                "message": "Please fill all required fields."
+            }),400
+
+        return jsonify({
+
+            "success": True,
+
+            "message": "Data Received",
+
+            "data": {
+
+                "farmer_id": farmer_id,
+
+                "state": state,
+
+                "district": district,
+
+                "village": village,
+
+                "land_area": land_area,
+
+                "soil_type": soil_type,
+
+                "water": water,
+
+                "season": season,
+
+                "irrigation": irrigation,
+
+                "rainfall": rainfall,
+
+                "previous_crop": previous_crop
+
+            }
+
+        })
+
+    except Exception as e:
+
+        traceback.print_exc()
+
+        return jsonify({
+            "success": False
+        })
 
 # ----------------------------
 # Recommendation History API
