@@ -533,7 +533,7 @@ def land_suitability():
         8. Estimated Revenue (₹)
         9. Estimated Profit (₹)
         10. AI Recommendation
-        11. 3 Farming Tips
+        11. Farming Tips (single string separated by newline)
 
         Return ONLY valid JSON.
 
@@ -550,15 +550,11 @@ def land_suitability():
         "irrigation_advice": "",
         "best_sowing_season": "",
         "expected_yield": "",
-        "estimated_investment": "",
-        "estimated_revenue": "",
-        "estimated_profit": "",
+        "estimated_investment": 0,
+        "estimated_revenue": 0,
+        "estimated_profit": 0,
         "reason": "",
-        "tips": [
-            "",
-            "",
-            ""
-        ]
+        "tips": ""
         }}
         """
 
