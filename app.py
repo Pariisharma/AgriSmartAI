@@ -542,7 +542,7 @@ def land_suitability():
 
         Use exactly this JSON format:
 
-        {
+        {{
         "recommended_crop": "",
         "suitability_score": 0,
         "fertilizer": "",
@@ -558,7 +558,7 @@ def land_suitability():
             "",
             ""
         ]
-        }
+        }}
         """
 
         response = client.models.generate_content(
