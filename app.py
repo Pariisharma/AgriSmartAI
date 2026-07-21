@@ -8,6 +8,7 @@ import traceback
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 import json
+from google.genai.errors import ServerError
 
 # ----------------------------
 # Load Environment Variables
@@ -610,12 +611,23 @@ def land_suitability():
         })
 
 
+    except ServerError as e:
+
+        print(e)
+
+        return jsonify({
+            "success": False,
+            "message": "AI service is currently busy. Please try again after a few moments."
+        }),503
+
+
     except ValueError:
 
         return jsonify({
             "success": False,
             "message": "Please enter valid numeric values."
         }),400
+
 
     except json.JSONDecodeError:
 
@@ -624,16 +636,15 @@ def land_suitability():
             "message": "AI returned an invalid response. Please try again."
         }),500
 
+
     except Exception as e:
 
-        print(e)
         traceback.print_exc()
 
         return jsonify({
             "success": False,
-            "message": "Unable to generate land suitability recommendation. Please try again after a few moments."
+            "message": "Something went wrong while generating the recommendation."
         }),500
-
 # ----------------------------
 # Recommendation History API
 # ----------------------------
