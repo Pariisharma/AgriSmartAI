@@ -7,6 +7,7 @@ import time
 import traceback
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+import json
 
 # ----------------------------
 # Load Environment Variables
@@ -565,8 +566,42 @@ def land_suitability():
             model="models/gemini-3-flash-preview",
             contents=prompt
         )
-        recommendation = response.text.strip()
+        try:
+            recommendation = json.loads(response.text)
+        except json.JSONDecodeError:
+            return jsonify({
+                "success": False,
+                "message": "Invalid JSON received from Gemini.",
+                "raw_response": response.text
+            }), 500
+
         print(recommendation)
+
+        history = LandSuitabilityHistory(
+
+            farmer_id=farmer_id,
+
+            state=state,
+            district=district,
+            village=village,
+
+            land_area=float(land_area),
+
+            soil_type=soil_type,
+            water=water,
+            season=season,
+            irrigation=irrigation,
+
+            rainfall=float(rainfall),
+
+            previous_crop=previous_crop,
+
+            recommendation=json.dumps(recommendation)
+        )
+
+        db.session.add(history)
+        db.session.commit()
+
         return jsonify({
             "success": True,
             "recommendation": recommendation
