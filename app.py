@@ -611,40 +611,42 @@ def land_suitability():
         })
 
 
-    except ServerError as e:
-
-        print(e)
+    except ServerError:
 
         return jsonify({
             "success": False,
-            "message": "AI service is currently busy. Please try again after a few moments."
-        }),503
+            "message": "AI service is currently busy due to high demand. Please try again in a few minutes.",
+            "recommendation": {}
+        }),200
 
 
     except ValueError:
 
         return jsonify({
             "success": False,
-            "message": "Please enter valid numeric values."
-        }),400
+            "message": "Please enter valid numeric values.",
+            "recommendation": {}
+        }),200
 
 
     except json.JSONDecodeError:
 
         return jsonify({
             "success": False,
-            "message": "AI returned an invalid response. Please try again."
-        }),500
+            "message": "Unable to process AI response. Please try again.",
+            "recommendation": {}
+        }),200
 
 
-    except Exception as e:
+    except Exception:
 
         traceback.print_exc()
 
         return jsonify({
             "success": False,
-            "message": "Something went wrong while generating the recommendation."
-        }),500
+            "message": "Something went wrong while generating the recommendation. Please try again.",
+            "recommendation": {}
+        }),200
 # ----------------------------
 # Recommendation History API
 # ----------------------------
