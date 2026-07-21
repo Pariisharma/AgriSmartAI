@@ -461,6 +461,8 @@ def land_suitability():
 
     try:
 
+        start = time.time()
+
         data = request.get_json(force=True)
 
         farmer_id = data.get("farmer_id")
@@ -598,19 +600,39 @@ def land_suitability():
         db.session.add(history)
         db.session.commit()
 
+        print("="*50)
+        print("Execution Time:", time.time() - start)
+        print("="*50)
+
         return jsonify({
             "success": True,
             "recommendation": recommendation
         })
 
 
+    except ValueError:
+
+        return jsonify({
+            "success": False,
+            "message": "Please enter valid numeric values."
+        }),400
+
+    except json.JSONDecodeError:
+
+        return jsonify({
+            "success": False,
+            "message": "AI returned an invalid response. Please try again."
+        }),500
+
     except Exception as e:
+
+        print(e)
         traceback.print_exc()
 
         return jsonify({
             "success": False,
-            "message": str(e)
-        }), 500
+            "message": "Unable to generate land suitability recommendation. Please try again after a few moments."
+        }),500
 
 # ----------------------------
 # Recommendation History API
