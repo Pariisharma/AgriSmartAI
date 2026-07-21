@@ -502,47 +502,84 @@ def land_suitability():
                 "message": "Please fill all required fields."
             }),400
 
+        prompt = f"""
+        You are an expert agricultural consultant.
+
+        Analyze the following land details and recommend the best crop.
+
+        Farmer Details:
+        State: {state}
+        District: {district}
+        Village: {village}
+
+        Land Area: {land_area} acres
+        Soil Type: {soil_type}
+        Water Availability: {water}
+        Season: {season}
+        Irrigation: {irrigation}
+        Annual Rainfall: {rainfall} mm
+        Previous Crop: {previous_crop}
+
+        Based on these details provide:
+
+        1. Recommended Crop
+        2. Suitability Score (0-100)
+        3. Fertilizer Recommendation
+        4. Irrigation Advice
+        5. Best Sowing Season
+        6. Expected Yield (Quintal/Acre)
+        7. Estimated Investment (₹)
+        8. Estimated Revenue (₹)
+        9. Estimated Profit (₹)
+        10. AI Recommendation
+        11. 3 Farming Tips
+
+        Return ONLY valid JSON.
+
+        Do not use markdown.
+        Do not use ```json.
+        Do not add any explanation.
+
+        Use exactly this JSON format:
+
+        {
+        "recommended_crop": "",
+        "suitability_score": 0,
+        "fertilizer": "",
+        "irrigation_advice": "",
+        "best_sowing_season": "",
+        "expected_yield": "",
+        "estimated_investment": "",
+        "estimated_revenue": "",
+        "estimated_profit": "",
+        "reason": "",
+        "tips": [
+            "",
+            "",
+            ""
+        ]
+        }
+        """
+
+        response = client.models.generate_content(
+            model="models/gemini-3-flash-preview",
+            contents=prompt
+        )
+        recommendation = response.text.strip()
+        print(recommendation)
         return jsonify({
-
             "success": True,
-
-            "message": "Data Received",
-
-            "data": {
-
-                "farmer_id": farmer_id,
-
-                "state": state,
-
-                "district": district,
-
-                "village": village,
-
-                "land_area": land_area,
-
-                "soil_type": soil_type,
-
-                "water": water,
-
-                "season": season,
-
-                "irrigation": irrigation,
-
-                "rainfall": rainfall,
-
-                "previous_crop": previous_crop
-
-            }
-
+            "recommendation": recommendation
         })
 
-    except Exception as e:
 
+    except Exception as e:
         traceback.print_exc()
 
         return jsonify({
-            "success": False
-        })
+            "success": False,
+            "message": str(e)
+        }), 500
 
 # ----------------------------
 # Recommendation History API
