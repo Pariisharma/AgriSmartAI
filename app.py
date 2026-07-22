@@ -535,8 +535,17 @@ def land_suitability():
         7. Estimated Investment (₹)
         8. Estimated Revenue (₹)
         9. Estimated Profit (₹)
-        10. AI Recommendation
-        11. Farming Tips (single string separated by newline)
+        10. AI Recommendation (Reason)
+        11. 11. Farming Tips
+
+            Rules for Farming Tips:
+
+            - Return exactly 5 tips.
+            - Each tip must be on a new line.
+            - Every tip must start with the "✅" emoji.
+            - Keep each tip short (maximum 15 words).
+            - Do not use numbering.
+            - Do not use bullets.
 
         Return ONLY valid JSON.
 
@@ -559,6 +568,14 @@ def land_suitability():
         "reason": "",
         "tips": ""
         }}
+        Example for "tips":
+
+            "tips":"
+            ✅ Treat seeds with Rhizobium before sowing.
+            ✅ Use Broad Bed Furrow method.
+            ✅ Keep the field weed-free.
+            ✅ Monitor pests regularly.
+            ✅ Apply sulfur fertilizer."
         """
 
         response = client.models.generate_content(
