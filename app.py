@@ -540,16 +540,12 @@ def land_suitability():
 
             Return tips exactly like this:
 
-                "tips":"
-                • Treat seeds with Rhizobium before sowing.
-                • Adopt Broad Bed Furrow method.
-                • Keep field weed-free.
-                • Monitor pests regularly.
-                • Apply sulfur fertilizer."
-
+                Tips:
+                - Tip 1
+                - Tip 2
+                - Tip 3
                 Do not return plain sentences.
 
-                Every line MUST begin with the bullet character "• ".
 
         Return ONLY valid JSON.
 
