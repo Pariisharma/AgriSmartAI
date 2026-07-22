@@ -540,7 +540,8 @@ def land_suitability():
 
             Return tips exactly like this:
 
-                "tips":"• Treat seeds with Rhizobium before sowing.
+                "tips":"
+                • Treat seeds with Rhizobium before sowing.
                 • Adopt Broad Bed Furrow method.
                 • Keep field weed-free.
                 • Monitor pests regularly.
