@@ -538,14 +538,17 @@ def land_suitability():
         10. AI Recommendation (Reason)
         11. 11. Farming Tips
 
-            Rules for Farming Tips:
+            Return tips exactly like this:
 
-            - Return exactly 5 tips.
-            - Each tip must be on a new line.
-            - Every tip must start with the "✅" emoji.
-            - Keep each tip short (maximum 15 words).
-            - Do not use numbering.
-            - Do not use bullets.
+                "tips":"• Treat seeds with Rhizobium before sowing.
+                • Adopt Broad Bed Furrow method.
+                • Keep field weed-free.
+                • Monitor pests regularly.
+                • Apply sulfur fertilizer."
+
+                Do not return plain sentences.
+
+                Every line MUST begin with the bullet character "• ".
 
         Return ONLY valid JSON.
 
@@ -568,14 +571,7 @@ def land_suitability():
         "reason": "",
         "tips": ""
         }}
-        Example for "tips":
-
-            "tips":"
-            ✅ Treat seeds with Rhizobium before sowing.
-            ✅ Use Broad Bed Furrow method.
-            ✅ Keep the field weed-free.
-            ✅ Monitor pests regularly.
-            ✅ Apply sulfur fertilizer."
+        
         """
 
         response = client.models.generate_content(
