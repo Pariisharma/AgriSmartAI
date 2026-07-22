@@ -1,38 +1,34 @@
-# 🌱 AgriSmart AI – Smart Agriculture Assistant
+# 🌾 AgriSmartAI – AI Powered Smart Agriculture Assistant
 
-An AI-powered Smart Agriculture Web Application built using OutSystems and Flask that helps farmers make informed decisions through AI-powered crop recommendations, soil analysis, fertilizer suggestions, weather forecasting, and crop planning.
+AgriSmartAI is an AI-powered Smart Agriculture Web Application built using **OutSystems Reactive Web**, **Python Flask**, **Google Gemini AI**, and **OpenWeather API**. It helps farmers make informed farming decisions by providing intelligent crop recommendations, land suitability analysis, soil insights, fertilizer suggestions, weather forecasting, and recommendation history.
 
 ---
 
-## 🌐 Live Demo
+# 🌐 Live Demo
 
-### Frontend (OutSystems)
+### 🌱 Frontend (OutSystems)
+
 https://personal-pjp4dbgf.outsystemscloud.com/AgriSmartAI/
 
-### Backend API (Render)
+### ⚙️ Backend API (Render)
+
 https://agrismartai-5ith.onrender.com
 
 ---
 
 # 🚀 Features
 
-👨‍🌾 Farmer Registration System
-
-🌦️ Real-Time Weather Dashboard (OpenWeather API)
-
-🌱 AI-Based Crop Recommendation
-
-🧪 Soil Analysis System
-
-🌿 Smart Fertilizer Recommendation
-
-📅 Crop Calendar & Seasonal Planning
-
-🤖 Google Gemini AI Integration
-
-☁️ Cloud Deployment (Render + OutSystems Cloud)
-
-📱 Responsive User Interface
+- 👨‍🌾 Farmer Registration & Login
+- 🌦️ Real-Time Weather Dashboard
+- 🌱 AI-Based Crop Recommendation
+- 🌍 Smart Land Suitability Survey
+- 🧪 Soil Analysis
+- 🌿 Fertilizer Recommendation
+- 📅 Crop Calendar & Seasonal Planning
+- 📜 Recommendation History
+- 🤖 Google Gemini AI Integration
+- ☁️ Cloud Deployment (Render + OutSystems Cloud)
+- 📱 Responsive User Interface
 
 ---
 
@@ -56,18 +52,27 @@ https://agrismartai-5ith.onrender.com
 - Google Gemini API
 - OpenWeather API
 
+## Database
+
+- PostgreSQL
+
 ## Deployment
 
 - Render
 - OutSystems Cloud
 
+## Version Control
+
+- Git
+- GitHub
+
 ---
 
-# 🌾 Modules
+# 🌾 Application Modules
 
 ## 👨‍🌾 Farmer Registration
 
-Allows farmers to create their profile by entering:
+Allows farmers to securely create their profile by entering:
 
 - Name
 - Mobile Number
@@ -79,9 +84,9 @@ Allows farmers to create their profile by entering:
 
 ## 🌦️ Weather Dashboard
 
-Provides real-time weather information using the OpenWeather API.
+Displays real-time weather information using the OpenWeather API.
 
-Displays:
+Features:
 
 - 🌡️ Temperature
 - 💧 Humidity
@@ -92,9 +97,9 @@ Displays:
 
 ---
 
-## 🌱 Crop Recommendation
+## 🌱 AI Crop Recommendation
 
-Uses Google Gemini AI to recommend suitable crops based on:
+Uses Google Gemini AI to recommend the most suitable crop based on:
 
 - Soil Type
 - Nitrogen (N)
@@ -102,17 +107,57 @@ Uses Google Gemini AI to recommend suitable crops based on:
 - Potassium (K)
 - pH Value
 
+Outputs include:
+
+- Recommended Crop
+- Confidence Score
+- AI Recommendation
+- Farming Tips
+
+---
+
+## 🌍 Smart Land Suitability Survey
+
+Analyzes complete land information using AI and provides intelligent recommendations.
+
+Input Parameters:
+
+- State
+- District
+- Village
+- Land Area
+- Soil Type
+- Water Availability
+- Season
+- Irrigation
+- Annual Rainfall
+- Previous Crop
+
+AI Generated Results:
+
+- 🌱 Recommended Crop
+- 📊 Suitability Score
+- 🌿 Fertilizer Recommendation
+- 💧 Irrigation Advice
+- 🌾 Best Sowing Season
+- 🌾 Expected Yield
+- 💰 Estimated Investment
+- 💵 Estimated Revenue
+- 📈 Estimated Profit
+- 🤖 AI Recommendation
+- ✅ Farming Tips
+
 ---
 
 ## 🧪 Soil Analysis
 
-Analyzes soil characteristics and provides recommendations for improving soil health.
+Analyzes soil characteristics and provides recommendations to improve soil health and productivity.
 
 ---
 
 ## 🌿 Fertilizer Recommendation
 
-Suggests suitable fertilizers based on:
+Suggests the most suitable fertilizers based on:
 
 - Crop Type
 - Soil Type
@@ -124,34 +169,44 @@ Suggests suitable fertilizers based on:
 
 Displays seasonal farming information including:
 
-- Season
+- Crop Season
 - Sowing Month
 - Harvest Month
 - Irrigation Schedule
 
 ---
 
+## 📜 Recommendation History
+
+Stores and displays previous AI recommendations, allowing farmers to review their farming decisions over time.
+
+---
+
 # 🤖 AI Integration
 
-Google Gemini AI is used for:
+Google Gemini AI powers:
 
 - Crop Recommendation
+- Land Suitability Analysis
 - Soil Analysis
 - Fertilizer Recommendation
+- Farming Tips
+- Yield & Profit Estimation
 
-AI responses are generated dynamically based on user inputs.
+All AI responses are dynamically generated based on user inputs.
 
 ---
 
 # 🌦️ Weather API Integration
 
-The Weather Dashboard uses the OpenWeather API to fetch live weather data.
+The Weather Dashboard fetches live weather data using the OpenWeather API.
 
-Information includes:
+Information displayed includes:
 
 - Temperature
 - Humidity
 - Wind Speed
+- Rainfall
 - Weather Condition
 - Location
 
@@ -200,24 +255,29 @@ AgriSmartAI/
 ├── requirements.txt
 ├── README.md
 ├── .gitignore
+├── skills.py
+├── jobs_data.py
 └── OutSystems Module (.oml)
 ```
 
 ---
 
-# ⚠️ Note
+# 📸 Screenshots
 
-This project is developed for educational and research purposes.
-
-AI-generated recommendations are intended to assist farmers and should not replace expert agricultural advice.
+- 🏠 Home Dashboard
+- 🌦️ Weather Dashboard
+- 🌱 Crop Recommendation
+- 🌍 Land Suitability Survey
+- 📊 Recommendation Result
+- 📜 Recommendation History
 
 ---
 
-# 👩‍💻 Developed By
+# ⚠️ Disclaimer
 
-**Pari Sharma**
+This project is developed for educational and internship purposes.
 
-B.Tech Computer Science Engineering
+AI-generated recommendations are intended to assist farmers and should be considered as decision-support suggestions rather than a replacement for professional agricultural advice.
 
 ---
 
@@ -226,12 +286,26 @@ B.Tech Computer Science Engineering
 - 🤖 AI Chatbot Assistant
 - 📷 Crop Disease Detection
 - 🌍 Multi-language Support
-- 📈 Farmer Dashboard
-- ☁️ Cloud Database Integration
+- 📈 Farmer Analytics Dashboard
+- 📡 Satellite-based Crop Monitoring
 - 🔔 Weather Alerts & Notifications
+- 🛒 Market Price Prediction
+- 🏛️ Government Scheme Recommendations
+
+---
+
+# 👩‍💻 Developed By
+
+**Pari Sharma**
+
+B.Tech – Computer Science & Engineering
+
+LNCT University, Bhopal
+
+Technical Intern – Xebia
 
 ---
 
 # 📜 License
 
-This project is developed for educational purposes only.
+This project is licensed for educational and learning purposes.
