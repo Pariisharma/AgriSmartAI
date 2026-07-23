@@ -536,16 +536,21 @@ def land_suitability():
         8. Estimated Revenue (₹)
         9. Estimated Profit (₹)
         10. AI Recommendation (Reason)
-        11. 11. Farming Tips
+        11. Farming Tips
 
-            Return tips exactly like this:
+            Return exactly 5 farming tips.
 
-                Tips:
-                - Tip 1
-                - Tip 2
-                - Tip 3
-                Do not return plain sentences.
+                Each tip must start with "- ".
 
+                Example:
+
+                - Treat seeds before sowing.
+                - Use balanced fertilizer.
+                - Monitor pests regularly.
+                - Irrigate at critical growth stages.
+                - Remove weeds on time.
+
+                Return all tips as a single string separated by new lines.
 
         Return ONLY valid JSON.
 
