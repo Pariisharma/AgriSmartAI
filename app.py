@@ -648,15 +648,37 @@ def land_suitability():
         }),200
 
 
-    except Exception:
+    except Exception as e:
 
         traceback.print_exc()
+
+        error_text = str(e)
+
+        # Gemini Quota Exceeded
+        if "429" in error_text or "RESOURCE_EXHAUSTED" in error_text:
+
+            return jsonify({
+                "success": False,
+                "message": "Daily AI request limit reached. Please try again later.",
+                "recommendation": {}
+            }), 200
+
+        # Gemini Busy
+        if "503" in error_text or "UNAVAILABLE" in error_text:
+
+            return jsonify({
+                "success": False,
+                "message": "AI service is currently busy. Please try again in a few minutes.",
+                "recommendation": {}
+            }), 200
 
         return jsonify({
             "success": False,
             "message": "Something went wrong while generating the recommendation. Please try again.",
             "recommendation": {}
-        }),200
+        }), 200
+
+    
 # ----------------------------
 # Recommendation History API
 # ----------------------------
