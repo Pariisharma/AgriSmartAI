@@ -538,19 +538,17 @@ def land_suitability():
         10. AI Recommendation (Reason)
         11. Farming Tips
 
-            Return exactly 5 farming tips.
+            Return tips exactly like this:
 
-                Each tip must start with "- ".
+                ✓ Treat seeds with...
+                ✓ Maintain proper irrigation...
+                ✓ Apply fertilizer...
+                ✓ Monitor pests...
+                ✓ Harvest on time...
 
-                Example:
-
-                - Treat seeds before sowing.
-                - Use balanced fertilizer.
-                - Monitor pests regularly.
-                - Irrigate at critical growth stages.
-                - Remove weeds on time.
-
-                Return all tips as a single string separated by new lines.
+                Do not use hyphen (-).
+                Use the ✓ symbol before every tip.
+                Each tip must be on a new line.
 
         Return ONLY valid JSON.
 
